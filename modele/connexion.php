@@ -11,13 +11,13 @@ if(isset($donne['valider'])){
     $mail = strtolower($donne['mail']);
     $mdp = $donne['mdp'];
     $reponde = $bdd->query("SELECT mail,mdp,idUtilisateur FROM intmarket.utilisateur");
+    if($donne['mdp'] == ''|| $donne['mail' == '']) {
+        $erreur = "case_vide";
+        $connexion = false;
+        $id_utilisateur = '';
+    }
     while($trouve = $reponde->fetch()){
-        if($donne['mdp'] == ''|| $donne['mail' == '']) {
-            $erreur = "case_vide";
-            $connexion = false;
-            $id_utilisateur = '';
-            break;
-        }elseif($donne['mail'] == $trouve['mail'] && $donne['mdp'] == $trouve['mdp']){
+        if($donne['mail'] == $trouve['mail'] && $donne['mdp'] == $trouve['mdp']){
             $connexion = true;
             $id_utilisateur = $trouve['idUtilisateur'];
             break;
