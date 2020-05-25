@@ -1,0 +1,12 @@
+.header{
+    position: fixed;
+    width: 100%;
+    top : 0;
+    z-index: 1;
+}
+.principal{
+    margin-top: 190px;
+}
+body{
+    margin: 0;
+}

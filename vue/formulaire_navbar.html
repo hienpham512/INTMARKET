@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="./vue/style_navbar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <table border="0" class="table_border">
+        <div class="navbar_1">
+            <tr class="ligne_1">
+                <th class="bouton_identifiant">
+                    <?php session_start(); include("./controller/formulaire_afficher_bouton_identifiant.php"); ?>
+                </th>
+                <th class="logo">
+                    <div>
+                        <a href="/index.php" class="photo_logo"><img src='./vue/photo_specific/logo.png' width='110px' height="110px"></a>
+                    </div>
+                </th>
+                <th>
+                    <div class="rechercher">
+                        <form action="./index.php?action=rehercher" method="post">
+                            <input type="text" class="boit_rechercher" name="mot_cle" placeholder="Rechercher">
+                            <button class="bouton_loupe" class=""><img src="./vue/photo_specific/photo_loupe_2.png"  width='50px'; height='50px'></button>
+                        </form>
+                    </div>
+                </th>
+                <th class="panier">
+                    <div>
+                        <img src="./vue/photo_specific/sac.png" width="50px" height="50px">
+
+                        <a href="./index.php?action=panier" class="photo_panier"><img src="./vue/photo_specific/panier.png" class="photo_panier" width='80px' ; height='80px'></a>
+                    </div>
+                </th>
+            </tr>
+            <tr class="categorie">
+                <th class="categorie_1"></th>
+                <th class="categorie_1">NOS RAYONS</th>
+                <th class="ligne_2">
+                    <div class="navbar_2">
+                        <div class="dropdown">
+                            <button class="dropbtn">COURSES <img src="./vue/photo_specific/supermarche.png" width="30px" height="30px">
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                            <div class="dropdown-content">
+                                <a href="./modele/analyser_choix_categorie.php?choix=alimentation">Alimentation <img
+                                    src="./vue/photo_specific/alimentation.png" width="50px" height="50px"></a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=legume">Légume <img
+                                    src="./vue/photo_specific/photo_legume.png" width="50px" height="50px"></a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=brasserie">Brasserie <img
+                                    src="./vue/photo_specific/pain.png" width="50px" height="50px"></a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=brasserie">boisson<img
+                                    src="/vue/photo_specific/boisson.png" width="50px" height="50px"></a>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="dropbtn">MODE <img src="./vue/photo_specific/mode.png" width="30px" height="30px">
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                            <div class="dropdown-content">
+                                <a href="./modele/analyser_choix_categorie.php?choix=femme">Femme</a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=homme">Homme</a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=enfant">Enfant</a>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="dropbtn">MAISON & LOISIRS <img src="./vue/photo_specific/maison_loisirs.png" width="30px" height="30px">
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                            <div class="dropdown-content">
+                                <a href="./modele/analyser_choix_categorie.php?choix=salon">Salon</a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=cusine">Cusine</a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=salle_de_bain">Salle de Bain</a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=loisirs">Loisirs</a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=materiaux">Matériaux</a>
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <button class="dropbtn">ANIMAL <img src="./vue/photo_specific/animal_2.png" width="30px" height="30px">
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                            <div class="dropdown-content">
+                                <a href="./modele/analyser_choix_categorie.php?choix=nourriture">Nourriture</a>
+                                <a href="./modele/analyser_choix_categorie.php?choix=accessoire">Accessoire</a>
+                            </div>
+
+                        </div>
+
+
+                        <?php include('./controller/formulaire_afficher_bouton_back_end.php'); ?>
+
+
+
+                    </div>
+                </th>
+            </tr>
+        </div>
+    </table>
+</body>
+
+</html>
