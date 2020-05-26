@@ -2,9 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
 </head>
 <body>
-$END$
+    <script>
+        function showUser(str) {
+            if (str=="") {
+                document.getElementById("txtHint").innerHTML="";
+                return;
+            }
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    document.getElementById("txtHint").innerHTML=this.responseText;
+                }
+            }
+            xmlhttp.open("GET","/controller/formulaire_afficher_backend.php?q="+str,true);
+            xmlhttp.send();
+        }
+        function afficher(str) {
+            if (str=="") {
+                document.getElementById("txtHint").innerHTML="";
+                return;
+            }
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    document.getElementById("txtHint").innerHTML=this.responseText;
+                }
+            }
+            xmlhttp.open("GET","/controller/formulaire_afficher_backend.php?table="+str,true);
+            xmlhttp.send();
+        }
+    </script>
+    <nav class="navbar_backend">
+        <img src="/vue/photo_specific/logo.png" width="100px" height="100px"><br>
+        <div class="bouton_action" >
+            <button  onclick="showUser(1)">AFFICHER</button><br>
+            <button  onclick="showUser(2)">AJOUTER</button><br>
+            <button  onclick="showUser(3)">MODIFIER</button><br>
+            <button  onclick="showUser(4)">SUPRIMER</button><br>
+            <a  href="index.php">SITE</a>
+        </div>
+        <div id="txtHint">
+            <b>
+                Le detail sera là
+            </b>
+        </div>
+    </nav>
 </body>
 </html>

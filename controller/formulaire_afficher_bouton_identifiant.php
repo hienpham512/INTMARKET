@@ -20,6 +20,7 @@ if (!isset($_SESSION['idUtilisateur'])) {
     }
     if($role == "administrateur"){
         $bouton_backend = "<a href='/index.php?action=backend'>Back-end</a>";
+        $_SESSION["role"] = "administrateur";
     }else{
         $bouton_backend = "";
     }
