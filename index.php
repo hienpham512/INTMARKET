@@ -14,6 +14,9 @@
         case 'formulaire_inscription':
             include('./vue/formulaire_inscription.html');
             break;
+        case 'backend':
+            include('./vue/formulaire_afficher_backend.html');
+            break;
         default:
             include('./controller/erreur.php');
             break;
