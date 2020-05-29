@@ -11,6 +11,14 @@ if(isset($_SESSION["role"]) && $_SESSION["role"] == "administrateur") {
         <button onclick='afficher(4)'>UTILISATEUR</button>
     </div>
 </div>";
+    if(isset($_GET['table'])){
+        $table = $_GET['table'];
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "succes"){
+                $resultat = "<label></label>";
+            }
+        }
+    }
     //recupérer le requette de fichier formulaire_afficher_backend.html pour analyser.
     if (isset($_GET['action_controller'])) {
         $_SESSION['action_administrateur'] = $_GET['action_controller'];
@@ -83,7 +91,7 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
                 $sousCategories[count($sousCategories)] = $trouve['sousCategorie'];
             }
         }
-        $select_sousCategorie = "<select name='idCategorie' >";
+        $select_sousCategorie = "<select name='sousCategorie' >";
         $select_nomCategorie = "<select name='nomCategorie' >";
         for ($i = 0; $i < count($nomCategories); $i++){
             $select_nomCategorie .= "<option value='$nomCategories[$i]'>$nomCategories[$i]</option>";
@@ -102,7 +110,7 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
                 <label>quantite: </label><input type='number' min='1' name='quantite'><br>
                 <label>nomCategorie: </label>$select_nomCategorie
                 <label>sousCategorie: </label>$select_sousCategorie<br>
-                <input type='submit' name='action' value='insérer'>
+                <input type='submit' name='ajouter' value='insérer'>
                 <input type='hidden' name='table' value='article'>
 </form>
 </div>";
@@ -117,7 +125,7 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
                 <option value='animal'>ANIMAL</option>
                 </select>
                 <input type='text' name='sousCategorie'>
-                <input type='submit' name='action' value='insérer'>
+                <input type='submit' name='ajouter' value='insérer'>
                 <input type='hidden' name='table' value='categorie'>
 </form>
 </div>";
@@ -125,9 +133,9 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
         $_SESSION['table_courant'] = "commande";
         echo "<div>
                 <form action='/modele/backend.php' method='post'>
-                <label>dateCommande</label><input type='date'>
+                <label>dateCommande</label><input type='date' name = 'date'>
                 <input type='number' name='idUtilisateur' min='1'>
-                <input type='submit' name='action' value='insérer'>
+                <input type='submit' name='ajouter' value='insérer'>
                 <input type='hidden' name='table' value='commande'>
                 </form>
 </div>";
@@ -143,7 +151,7 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
                 <label>panier : </label><input type='text' name='panier'><br>
                 <label>role : </label><input type='text' name='role'><br>
                 <input type='hidden' name='table' value='utilisateur'>
-                <input type='submit' name='action' value='insérer'>
+                <input type='submit' name='ajouter' value='insérer'>
 
 </div>";
         //Si l'action est modifier
@@ -204,13 +212,14 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
         echo "<table border='1'><tr><th>idCategorie<th>nomCategorie<th>sousCategorie<th>action</th></tr>";
         while ($trouve = $donne->fetch()) {
             $idCategorie = $trouve['idCategorie'];
+            var_dump($trouve['idCategorie']);
             echo "<tr><td>" . $trouve["idCategorie"] . "<td>" . $trouve["nomCategorie"] . "<td>" . $trouve["sousCategorie"] ."<td>". "<div class='dropdown'>
                                 <button onclick='myFunction()' class='dropbtn'>supprimer</button>
                                 <div id='myDropdown' class='dropdown-content'>
-                                        <h1>Vous êtes sûr de supprimer?</h1>
+                                        <h1>Vous êtes sûr de supprimer? $idCategorie</h1>
                                         <form action='/modele/backend.php' method='post'>
                                             <input type='hidden' name='idCategorie' value='$idCategorie'>
-                                            <button name='supprimer' value='oui'>oui</button>
+                                            <button name='supprimer' value='$idCategorie'>oui</button>
                                         </form>
                                         <button>non</button>
                                     </div>
@@ -265,7 +274,7 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
             $idArticle = $trouve['idArticle'];
             if ($trouve['idArticle'] == $id_index_modifier) {
                 echo "<tr>
-                        <td><input type='number' min='1' name='idArticle' value='" . $trouve['idArticle'] . "'></td>
+                        <td> ".$trouve['idArticle']." <input type='hidden' min='1' name='idArticle' value='" . $trouve['idArticle'] . "'></td>
                         <td><input type='text' name='nomArticle' value='" . $trouve['nomArticle'] . "'></td>
                         <td><input type='number' min='0' name='prixArticle' value='" . $trouve['prixArticle'] . "'></td>
                         <td><input type='text' name='imageArticle' value='" . $trouve['imageArticle'] . "'></td>
@@ -293,7 +302,7 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
             $idCategorie = $trouve['idCategorie'];
             if ($trouve['idCategorie'] == $id_index_modifier) {
                 echo "<tr>
-                        <td><input type='number' min='1' name='idCategorie' value='" . $trouve['idCategorie'] . "'></td>
+                        <td>". $trouve['idCategorie'] ."<input type='hidden' min='1' name='idCategorie' value='" . $trouve['idCategorie'] . "'></td>
                         <td><input type='text' name='nomCategorie' value='" . $trouve['nomCategorie'] . "'></td>
                         <td><input type='text' name='sousCategorie' value='" . $trouve['sousCategorie'] . "'></td>
                         <td><div class='dropdown'>    
@@ -319,7 +328,7 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
             $utilisateur_idUtilisateur = $trouve['utilisateur_idUtilisateur'];
             if ($trouve['idCommande'] == $id_index_modifier) {
                 echo "<tr>
-                       <td><input type='number' min='1' name='idCommande' value='$idCommande'></td>
+                       <td> $idCommande <input type='hidden' min='1' name='idCommande' value='$idCommande'></td>
                             <td><input type='date' name='dateCommande' value='$dateCommande'></td>
                             <td><input type='number' min='1' name='utilisateur_idUtilisateur' value='$utilisateur_idUtilisateur'></td>
                             <td><div class='dropdown'>
@@ -343,7 +352,7 @@ if(isset($_SESSION['action_administrateur']) && isset($table)){
             $idUtilisateur = $trouve['idUtilisateur'];
             if ($trouve['idUtilisateur'] == $id_index_modifier) {
                 echo "<tr>
-                        <td><input type='number' min='1' name='idUtilisateur' value='" . $trouve['idUtilisateur'] . "'></td>
+                        <td>" . $trouve['idUtilisateur'] . "<input type='hidden' name='idUtilisateur' value='" . $trouve['idUtilisateur'] . "'></td>
                         <td><input type='text' name='nom' value='" . $trouve['nom'] . "'></td>
                         <td><input type='text' name='prenom' value='" . $trouve['prenom'] . "'></td>
                         <td><input type='text' name='mail' value='" . $trouve['mail'] . "'></td>
