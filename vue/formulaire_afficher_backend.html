@@ -33,7 +33,7 @@
                     document.getElementById("txtHint").innerHTML=this.responseText;
                 }
             }
-            xmlhttp.open("GET","/controller/formulaire_afficher_backend.php?action_controller="+str,true);
+            xmlhttp.open("GET","/controller/formulaire_action_afficher_et_ajouter_backend.php?action_controller="+str,true);
             xmlhttp.send();
         }
         function afficher(str) {
@@ -47,7 +47,21 @@
                     document.getElementById("txtHint").innerHTML=this.responseText;
                 }
             }
-            xmlhttp.open("GET","/controller/formulaire_afficher_backend.php?table="+str,true);
+            xmlhttp.open("GET","/controller/formulaire_action_afficher_et_ajouter_backend.php?table="+str,true);
+            xmlhttp.send();
+        }
+        function afficher_modifier_et_supprimer(str) {
+            if (str=="") {
+                document.getElementById("txtHint").innerHTML="";
+                return;
+            }
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    document.getElementById("txtHint").innerHTML=this.responseText;
+                }
+            }
+            xmlhttp.open("GET","/controller/formulaire_action_modifier_et_supprimer_backend.php?table="+str,true);
             xmlhttp.send();
         }
         function modifier(n) {
@@ -61,21 +75,7 @@
                     document.getElementById("txtHint").innerHTML=this.responseText;
                 }
             }
-            xmlhttp.open("GET","/controller/formulaire_afficher_backend.php?modifier="+n,true);
-            xmlhttp.send();
-        }
-        function supprimer(n) {
-            if (n == "") {
-                document.getElementById("txtHint").innerHTML="";
-                return;
-            }
-            var xmlhttp=new XMLHttpRequest();
-            xmlhttp.onreadystatechange=function() {
-                if (this.readyState==4 && this.status==200) {
-                    document.getElementById("txtHint").innerHTML=this.responseText;
-                }
-            }
-            xmlhttp.open("GET","/controller/formulaire_afficher_backend.php?supprimer="+n,true);
+            xmlhttp.open("GET","/controller/formulaire_action_modifier_et_supprimer_backend.php?modifier="+n,true);
             xmlhttp.send();
         }
         /* When the user clicks on the button,
@@ -105,12 +105,9 @@
             <button  onclick="showUser(2)">AJOUTER</button><br>
             <button  onclick="showUser(3)">MODIFIER</button><br>
             <button  onclick="showUser(4)">SUPRIMER</button><br>
-            <a  href="index.php">SITE</a>
+            <a  href="/index.php">SITE</a>
         </div>
         <div id="txtHint">
-            <b>
-                Le detail sera là
-            </b>
         </div>
     </nav>
 </body>

@@ -1,12 +1,12 @@
 <?php
 if (!isset($_SESSION['idUtilisateur'])) {
     echo "<div class='dropdown'>
-            <button class='dropbtn'><img src='./vue/photo_specific/photo_identifiant.png' width='100px'; height='30px'; class='photo_identifiant'>
+            <button class='dropbtn'><img src='/vue/photo_specific/photo_identifiant.png' width='100px'; height='30px'; class='photo_identifiant'>
                 <i class='fa fa-caret-down'></i>
             </button>
             <div class='dropdown-content'>
-                <a href='./index.php?action=formulaire_connexion' >connexion</a>
-                <a href='./index.php?action=formulaire_inscription' >inscription</a>
+                <a href='/index.php?action=formulaire_connexion' >connexion</a>
+                <a href='/index.php?action=formulaire_inscription' >inscription</a>
             </div>
         </div>";
 } else {
