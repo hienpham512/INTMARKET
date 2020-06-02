@@ -124,7 +124,6 @@ if(isset($_POST) && isset($_SESSION['role']) && $_SESSION['role'] == 'administra
         //il y a encore de faut , ne peut pas de supprimer, $idCategorie est tj 2.
     }elseif (isset($_POST['supprimer']) && $_SESSION['table_courant'] == "categorie"){
         $idCategorie = intval($_POST["idCategorie"]);
-        $idCategorie = 2;
         $sql = "DELETE FROM intmarket.categorie WHERE idCategorie = '$idCategorie';";
         if($bdd ->exec($sql) == true){
             $status = "succes";
@@ -143,6 +142,7 @@ if(isset($_POST) && isset($_SESSION['role']) && $_SESSION['role'] == 'administra
         $idUtilisateur = intval($_POST["idUtilisateur"]);
         $sql = "DELETE FROM intmarket.utilisateur WHERE idUtilisateur = '$idUtilisateur';";
         if($bdd ->exec($sql) == true){
+            $bdd ->query($sql);
             $status = "succes";
         }else{
             $status = "erreur";
@@ -281,6 +281,12 @@ if(isset($_POST) && isset($_SESSION['role']) && $_SESSION['role'] == 'administra
                 $status = "erreur";
             }
         }
+
+    }
+    var_dump($status);
+    if($status == 'succes'){
+        header("location: ../index.php?action=backend");
+    }elseif ($status == 'erreur'){
 
     }
 }
